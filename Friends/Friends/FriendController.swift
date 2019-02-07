@@ -12,9 +12,10 @@ class FriendController {
     
     var friends: [Friend] = []
     
-    func addFriend(name: String, information: String) {
-        let newFriend = Friend(name: name, imageName: name, information: information)
-        friends.append(newFriend)
+    func addFriends(list: [String: String]) {
+        for (name, info) in list {
+            let newFriend = Friend(name: name, information: info)
+            friends.append(newFriend)
+        }
     }
-    
 }

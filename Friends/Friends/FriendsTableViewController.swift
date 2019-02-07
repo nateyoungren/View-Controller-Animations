@@ -12,14 +12,23 @@ class FriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        friendController.addFriends(list: list)
+        tableView.reloadData()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        return friendController.friends.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Friend", for: indexPath)
+        
+        let friend = friendController.friends[indexPath.row]
+        let friendName = friend.name.capitalized
+        let friendImage = UIImage(named: friend.name)
+        
+        cell.textLabel?.text = friendName
+        cell.imageView?.image = friendImage
         
         return cell
     }
@@ -33,10 +42,4 @@ class FriendsTableViewController: UITableViewController {
                 "phoebe": "Thank you, my babies.",
                 "joey": "Well the fridge broke, so I had to eat everything."]
     
-    var friends: [Friend] {
-        for (name, info) in list {
-            friendController.addFriend(name: name, information: info)
-        }
-        return friendController.friends
-    }
 }

@@ -14,6 +14,7 @@
 		7752A692220CCCC900C761A3 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7752A691220CCCC900C761A3 /* FriendsTableViewController.swift */; };
 		7752A694220CCCFF00C761A3 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7752A693220CCCFF00C761A3 /* Friend.swift */; };
 		7752A696220CCD6400C761A3 /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7752A695220CCD6400C761A3 /* FriendController.swift */; };
+		7752A698220CD44D00C761A3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7752A697220CD44D00C761A3 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		7752A691220CCCC900C761A3 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		7752A693220CCCFF00C761A3 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		7752A695220CCD6400C761A3 /* FriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
+		7752A697220CD44D00C761A3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				7752A691220CCCC900C761A3 /* FriendsTableViewController.swift */,
 				7752A693220CCCFF00C761A3 /* Friend.swift */,
 				7752A695220CCD6400C761A3 /* FriendController.swift */,
+				7752A697220CD44D00C761A3 /* DetailViewController.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			files = (
 				7752A694220CCCFF00C761A3 /* Friend.swift in Sources */,
 				7752A696220CCD6400C761A3 /* FriendController.swift in Sources */,
+				7752A698220CD44D00C761A3 /* DetailViewController.swift in Sources */,
 				7752A692220CCCC900C761A3 /* FriendsTableViewController.swift in Sources */,
 				7752A680220CCC6300C761A3 /* AppDelegate.swift in Sources */,
 			);
