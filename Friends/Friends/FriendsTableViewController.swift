@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsTableViewController: UITableViewController, UIViewControllerTransitioningDelegate {
+class FriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +38,11 @@ class FriendsTableViewController: UITableViewController, UIViewControllerTransit
             guard let detailVC = segue.destination as? DetailViewController,
             let index = tableView.indexPathForSelectedRow else { return }
             detailVC.friend = friendController.friends[index.row]
-            segue.destination.transitioningDelegate = self
+            self.navigationDelegate.sourceCell = tableView.cellForRow(at: index)
         }
     }
+    
+    var navigationDelegate = NavigationController()
     
     let friendController = FriendController()
     
