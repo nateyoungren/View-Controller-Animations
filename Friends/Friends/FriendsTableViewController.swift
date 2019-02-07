@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsTableViewController: UITableViewController {
+class FriendsTableViewController: UITableViewController, UIViewControllerTransitioningDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +31,15 @@ class FriendsTableViewController: UITableViewController {
         cell.imageView?.image = friendImage
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Detail" {
+            guard let detailVC = segue.destination as? DetailViewController,
+            let index = tableView.indexPathForSelectedRow else { return }
+            detailVC.friend = friendController.friends[index.row]
+            segue.destination.transitioningDelegate = self
+        }
     }
     
     let friendController = FriendController()
