@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UIViewControllerTransitioningDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +22,15 @@ class DetailViewController: UIViewController {
         textView.text = friend.information
     }
     
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return animator
+    }
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textView: UITextView!
     
     var friend: Friend?
+    
+    let animator = Animator()
 }

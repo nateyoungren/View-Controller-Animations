@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsTableViewController: UITableViewController {
+class FriendsTableViewController: UITableViewController, UIViewControllerTransitioningDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,16 +33,23 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
     
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return animator
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.transitioningDelegate = self
         if segue.identifier == "Detail" {
             guard let detailVC = segue.destination as? DetailViewController,
             let index = tableView.indexPathForSelectedRow else { return }
             detailVC.friend = friendController.friends[index.row]
-            self.navigationDelegate.sourceCell = tableView.cellForRow(at: index)
+            self.sourceCell = tableView.cellForRow(at: index)
         }
     }
     
-    var navigationDelegate = NavigationController()
+    var sourceCell: UITableViewCell?
+    
+    let animator = Animator()
     
     let friendController = FriendController()
     
@@ -52,5 +59,4 @@ class FriendsTableViewController: UITableViewController {
                 "chandler": "So it seems like this internet thing is here to stay, huh?",
                 "phoebe": "Thank you, my babies.",
                 "joey": "Well the fridge broke, so I had to eat everything."]
-    
 }
