@@ -30,6 +30,8 @@ class DetailViewController: UIViewController, UIViewControllerTransitioningDeleg
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textView: UITextView!
     
+    var delegate: NavigationControllerDelegate?
+    
     var friend: Friend?
     
     let animator = Animator()

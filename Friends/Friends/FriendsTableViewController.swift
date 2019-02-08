@@ -13,6 +13,7 @@ class FriendsTableViewController: UITableViewController, UIViewControllerTransit
     override func viewDidLoad() {
         super.viewDidLoad()
         friendController.addFriends(list: list)
+        navigationController?.delegate = self as? UINavigationControllerDelegate
         tableView.reloadData()
     }
 
@@ -32,10 +33,7 @@ class FriendsTableViewController: UITableViewController, UIViewControllerTransit
         
         return cell
     }
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return animator
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         segue.destination.transitioningDelegate = self
@@ -43,11 +41,13 @@ class FriendsTableViewController: UITableViewController, UIViewControllerTransit
             guard let detailVC = segue.destination as? DetailViewController,
             let index = tableView.indexPathForSelectedRow else { return }
             detailVC.friend = friendController.friends[index.row]
-            self.sourceCell = tableView.cellForRow(at: index)
+            let cell = tableView.cellForRow(at: index)
+            navigationControllerDelegate.sourceCell = cell
+            detailVC.delegate = navigationControllerDelegate
         }
     }
     
-    var sourceCell: UITableViewCell?
+    let navigationControllerDelegate = NavigationControllerDelegate()
     
     let animator = Animator()
     
