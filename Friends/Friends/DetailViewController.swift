@@ -26,6 +26,11 @@ class DetailViewController: UIViewController, UIViewControllerTransitioningDeleg
         return animator
     }
     
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: true, completion: nil)
+        transitioningDelegate = self
+    }
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textView: UITextView!

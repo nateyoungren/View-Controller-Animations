@@ -18,14 +18,14 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         
         guard let fromVC = transitionContext.viewController(forKey: .from) as? FriendsTableViewController,
         let toVC = transitionContext.viewController(forKey: .to) as? DetailViewController,
-            let toView = transitionContext.view(forKey: .to),
-        let cell = NavigationControllerDelegate().sourceCell else {
+        let toView = transitionContext.view(forKey: .to),
+        let cell = fromVC.navigationControllerDelegate.sourceCell else {
             transitionContext.completeTransition(false)
             return
         }
 
         let containerView = transitionContext.containerView
-
+        
         let toViewEndFrame = transitionContext.finalFrame(for: toVC)
 
         containerView.addSubview(toView)
@@ -86,9 +86,5 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         }
         
     }
-    
-    
-    
-    
     
 }

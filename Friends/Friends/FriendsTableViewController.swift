@@ -43,7 +43,7 @@ class FriendsTableViewController: UITableViewController, UIViewControllerTransit
             detailVC.friend = friendController.friends[index.row]
             let cell = tableView.cellForRow(at: index)
             navigationControllerDelegate.sourceCell = cell
-            detailVC.delegate = navigationControllerDelegate
+//            detailVC.delegate = navigationControllerDelegate
         }
     }
     
