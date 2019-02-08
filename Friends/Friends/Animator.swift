@@ -10,12 +10,6 @@ import UIKit
 
 class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    var push = false
-    var fromLabel: UILabel?
-    var fromImageView: UIImageView?
-    var toLabel: UILabel?
-    var toImageView: UIImageView?
-    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
@@ -92,7 +86,12 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
 
         }
-        
     }
+    
+    var push = false
+    var fromLabel: UILabel?
+    var fromImageView: UIImageView?
+    var toLabel: UILabel?
+    var toImageView: UIImageView?
     
 }
