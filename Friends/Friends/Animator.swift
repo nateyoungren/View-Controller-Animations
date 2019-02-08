@@ -10,18 +10,32 @@ import UIKit
 
 class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     
+    var push = false
+    var fromLabel: UILabel?
+    var fromImageView: UIImageView?
+    var toLabel: UILabel?
+    var toImageView: UIImageView?
+    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        guard let fromVC = transitionContext.viewController(forKey: .from) as? FriendsTableViewController,
-        let toVC = transitionContext.viewController(forKey: .to) as? DetailViewController,
+        guard let fromLabel = fromLabel,
+        let fromImageView = fromImageView,
         let toView = transitionContext.view(forKey: .to),
-        let cell = fromVC.navigationControllerDelegate.sourceCell else {
+        let toVC = transitionContext.viewController(forKey: .to)
+        else {
             transitionContext.completeTransition(false)
             return
+        }
+        
+        if push {
+            guard let detailVC = transitionContext.viewController(forKey: .to) as? DetailViewController else { transitionContext.completeTransition(false)
+                return }
+            toLabel = detailVC.label
+            toImageView = detailVC.image
         }
 
         let containerView = transitionContext.containerView
@@ -33,19 +47,13 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         toView.frame = toViewEndFrame
         toView.alpha = 0
 
-        let fromLabel = cell.textLabel!
-        let fromImage = cell.imageView!
-
-        let toLabel = toVC.label!
-        let toImage = toVC.image!
-
         fromLabel.alpha = 0
-        fromImage.alpha = 0
-        toLabel.alpha = 0
-        toImage.alpha = 0
+        fromImageView.alpha = 0
+        toLabel?.alpha = 0
+        toImageView?.alpha = 0
 
         let transitionLabelInitialFrame = containerView.convert(fromLabel.bounds, to: fromLabel)
-        let transitionImageInitialFrame = containerView.convert(fromImage.bounds, to: fromImage)
+        let transitionImageInitialFrame = containerView.convert(fromImageView.bounds, to: fromImageView)
 
         let transitionLabel = UILabel(frame: transitionLabelInitialFrame)
         let transitionImage = UIImageView(frame: transitionImageInitialFrame)
@@ -53,7 +61,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         transitionLabel.font = fromLabel.font
         transitionLabel.text = fromLabel.text
 
-        transitionImage.image = fromImage.image
+        transitionImage.image = fromImageView.image
 
         containerView.addSubview(transitionLabel)
         containerView.addSubview(transitionImage)
@@ -64,8 +72,8 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
 
         UIView.animate(withDuration: transitionDuration, animations: {
 
-            let transitionLabelEndFrame = containerView.convert(toLabel.bounds, to: toLabel)
-            let transitionImageEndFrame = containerView.convert(toImage.bounds, to: toImage)
+            let transitionLabelEndFrame = containerView.convert(self.toLabel!.bounds, to: self.toLabel!)
+            let transitionImageEndFrame = containerView.convert(self.toImageView!.bounds, to: self.toImageView!)
             transitionLabel.frame = transitionLabelEndFrame
             transitionImage.frame = transitionImageEndFrame
 
@@ -73,10 +81,10 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
 
         }) { (_) in
 
-            toLabel.alpha = 1
-            toImage.alpha = 1
+            self.toLabel?.alpha = 1
+            self.toImageView?.alpha = 1
             fromLabel.alpha = 1
-            fromImage.alpha = 1
+            fromImageView.alpha = 1
 
             transitionLabel.removeFromSuperview()
             transitionImage.removeFromSuperview()
