@@ -13,7 +13,7 @@ class FriendsTableViewController: UITableViewController, UIViewControllerTransit
     override func viewDidLoad() {
         super.viewDidLoad()
         friendController.addFriends(list: list)
-        navigationController?.delegate = self as? UINavigationControllerDelegate
+        navigationController?.delegate = navigationControllerDelegate
         tableView.reloadData()
     }
 
